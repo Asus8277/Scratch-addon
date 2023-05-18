@@ -3,49 +3,45 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Like and Favorite Extension</title>
+  <title>User Info Extension</title>
   <script src="https://sheeptester.github.io/scratch-gui/build/sheepit.min.js"></script>
   <script src="extension.js"></script>
 </head>
 <body>
-  <h1>Like and Favorite Extension</h1>
-  <button id="checkButton">Check Like and Favorite</button>
+  <h1>User Info Extension</h1>
+  <button id="getUserInfoButton">Get User Info</button>
   <div id="result"></div>
+  <script>
+    Scratch.extensions.register('userInfoExtension', {
+      getInfo: function () {
+        return {
+          id: 'userInfoExtension',
+          name: 'User Info Extension',
+          blocks: [
+            {
+              opcode: 'getUserInfo',
+              blockType: Scratch.BlockType.REPORTER,
+              text: 'Get User Info',
+              arguments: {},
+            },
+          ],
+        };
+      },
+      getUserInfo: function () {
+        const resultElement = document.getElementById('result');
+        resultElement.innerText = 'Fetching user info...';
+
+        // Use the Scratch API or any other relevant API to fetch user info
+        // Replace the following code with your actual implementation
+        const userInfo = {
+          username: Scratch.vm.runtime.username,
+          userId: Scratch.vm.runtime.userId,
+        };
+
+        resultElement.innerText = `Username: ${userInfo.username}\nUser ID: ${userInfo.userId}`;
+        return JSON.stringify(userInfo);
+      },
+    });
+  </script>
 </body>
 </html>
-
-// extension.js
-const extensionId = 'likeAndFavoriteExtension';
-
-function detectLikeAndFavorite() {
-  const projectID = window.location.pathname.split('/').pop();
-  
-  // Use the Scratch API or any other relevant API to check project status
-  // Replace the following code with your actual implementation
-  const isLiked = checkIfProjectIsLiked(852305445);
-  const isFavorited = checkIfProjectIsFavorited(852305445);
-  
-  const resultElement = document.getElementById('result');
-  if (isLiked && isFavorited) {
-    resultElement.innerText = 'This project is liked and favorited.';
-  } else if (isLiked) {
-    resultElement.innerText = 'This project is liked but not favorited.';
-  } else if (isFavorited) {
-    resultElement.innerText = 'This project is favorited but not liked.';
-  } else {
-    resultElement.innerText = 'This project is neither liked nor favorited.';
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  const checkButton = document.getElementById('checkButton');
-  checkButton.addEventListener('click', detectLikeAndFavorite);
-});
-
-Scratch.extensions.register(extensionId, {
-  // Define any additional methods or properties for your extension
-});
-
-
-
-
