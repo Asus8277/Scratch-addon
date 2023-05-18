@@ -31,15 +31,21 @@
         const resultElement = document.getElementById('result');
         resultElement.innerText = 'Fetching user info...';
 
-        // Use the Scratch API or any other relevant API to fetch user info
-        // Replace the following code with your actual implementation
-        const userInfo = {
-          username: Scratch.vm.runtime.username,
-          userId: Scratch.vm.runtime.userId,
-        };
-
-        resultElement.innerText = `Username: ${userInfo.username}\nUser ID: ${userInfo.userId}`;
-        return JSON.stringify(userInfo);
+        // Use the Scratch API to fetch user info
+        fetch('https://api.scratch.mit.edu/users/' + Scratch.vm.runtime.username)
+          .then(response => response.json())
+          .then(data => {
+            const userInfo = {
+              username: data.username,
+              userId: data.id,
+            };
+            resultElement.innerText = `Username: ${userInfo.username}\nUser ID: ${userInfo.userId}`;
+            return JSON.stringify(userInfo);
+          })
+          .catch(error => {
+            resultElement.innerText = 'Error occurred while fetching user info.';
+            console.error(error);
+          });
       },
     });
   </script>
