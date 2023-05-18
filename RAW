@@ -1,0 +1,31 @@
+// extension.js
+const extensionId = 'likeAndFavoriteExtension';
+
+function detectLikeAndFavorite() {
+  const projectID = window.location.pathname.split('/').pop();
+  
+  // Use the Scratch API or any other relevant API to check project status
+  // Replace the following code with your actual implementation
+  const isLiked = checkIfProjectIsLiked(projectID);
+  const isFavorited = checkIfProjectIsFavorited(projectID);
+  
+  const resultElement = document.getElementById('result');
+  if (isLiked && isFavorited) {
+    resultElement.innerText = 'This project is liked and favorited.';
+  } else if (isLiked) {
+    resultElement.innerText = 'This project is liked but not favorited.';
+  } else if (isFavorited) {
+    resultElement.innerText = 'This project is favorited but not liked.';
+  } else {
+    resultElement.innerText = 'This project is neither liked nor favorited.';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const checkButton = document.getElementById('checkButton');
+  checkButton.addEventListener('click', detectLikeAndFavorite);
+});
+
+Scratch.extensions.register(extensionId, {
+  // Define any additional methods or properties for your extension
+});
