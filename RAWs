@@ -1,3 +1,19 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Like and Favorite Extension</title>
+  <script src="https://sheeptester.github.io/scratch-gui/build/sheepit.min.js"></script>
+  <script src="extension.js"></script>
+</head>
+<body>
+  <h1>Like and Favorite Extension</h1>
+  <button id="checkButton">Check Like and Favorite</button>
+  <div id="result"></div>
+</body>
+</html>
+
 // extension.js
 const extensionId = 'likeAndFavoriteExtension';
 
@@ -29,3 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 Scratch.extensions.register(extensionId, {
   // Define any additional methods or properties for your extension
 });
+
+
+
+
