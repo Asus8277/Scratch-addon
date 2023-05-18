@@ -22,8 +22,8 @@ function detectLikeAndFavorite() {
   
   // Use the Scratch API or any other relevant API to check project status
   // Replace the following code with your actual implementation
-  const isLiked = checkIfProjectIsLiked(projectID);
-  const isFavorited = checkIfProjectIsFavorited(projectID);
+  const isLiked = checkIfProjectIsLiked(852305445);
+  const isFavorited = checkIfProjectIsFavorited(852305445);
   
   const resultElement = document.getElementById('result');
   if (isLiked && isFavorited) {
